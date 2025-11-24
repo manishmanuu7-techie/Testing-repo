@@ -38,10 +38,10 @@ jobs:
         id: info-output
         run: |
           echo "actor: ${{github.actor}}" >> $GITHUB_OUTPUT
-          echo "repo url: https://github.com/${{github.url}}" >> $GITHUB_OUTPUT
+          echo "repo_url: https://github.com/${{github.url}}" >> $GITHUB_OUTPUT
 
       - name: printing the stored values
         run: |
           echo "Actor from info-output: ${{steps.info-output.outputs.actor}}"
-          echo "Repo url from info-output: ${{steps.info-output.outputs.repo url}}"
+          echo "Repo url from info-output: ${{steps.info-output.outputs.repo_url}}"
   
