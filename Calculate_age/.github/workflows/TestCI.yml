@@ -1,0 +1,36 @@
+
+name: python-CI
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "please enter your name"
+        type: string
+      age:
+        description: "please enter your age"
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: set-up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: install dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: run python tests
+        run:
+          if [ -d tests ]; then pytest; else echo "No tests directory found, skipping pytest"; fi
+
+      - name: Run the script
+        run: |
+          printf "${{ github.event.inputs.name }}\n${{ github.event.inputs.age }}\n" | python test_calculate.py
+  
