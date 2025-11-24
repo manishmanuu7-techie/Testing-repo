@@ -33,4 +33,9 @@ jobs:
       - name: Run the script
         run: |
           printf "${{ github.event.inputs.name }}\n${{ github.event.inputs.age }}\n" | python Calculate_age/calculate.py
+
+      - name: printing
+        run: |
+          echo "Actor: ${{github.actor}}"
+          echo "repo url: https://github.com/${{github.url}}"
   
