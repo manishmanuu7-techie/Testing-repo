@@ -32,5 +32,5 @@ jobs:
 
       - name: Run the script
         run: |
-          printf "${{ github.event.inputs.name }}\n${{ github.event.inputs.age }}\n" | python Calculate_age/test_calculate.py
+          printf "${{ github.event.inputs.name }}\n${{ github.event.inputs.age }}\n" | python Calculate_age/calculate.py
   
