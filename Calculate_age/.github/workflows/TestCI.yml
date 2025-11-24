@@ -1,5 +1,4 @@
-
-name: python-CI
+name: testpython-CI
 on:
   workflow_dispatch:
     inputs:
