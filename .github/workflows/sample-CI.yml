@@ -42,6 +42,6 @@ jobs:
 
       - name: printing the stored values
         run: |
-          echo "Actor from info-output: ${{steps.info-output.outputs.actor"
-          echo "Repo url from info-output: ${{steps.info-output.outputs.repo url"
+          echo "Actor from info-output: ${{steps.info-output.outputs.actor}}"
+          echo "Repo url from info-output: ${{steps.info-output.outputs.repo url}}"
   
