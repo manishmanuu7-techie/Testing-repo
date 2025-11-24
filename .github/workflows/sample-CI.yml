@@ -35,7 +35,13 @@ jobs:
           printf "${{ github.event.inputs.name }}\n${{ github.event.inputs.age }}\n" | python Calculate_age/calculate.py
 
       - name: printing
+        id: info-output
         run: |
-          echo "Actor: ${{github.actor}}"
-          echo "Repo url: https://github.com/${{github.url}}"
+          echo "actor: ${{github.actor}}" >> $GITHUB_OUTPUT
+          echo "repo url: https://github.com/${{github.url}}" >> $GITHUB_OUTPUT
+
+      - name: printing the stored values
+        run: |
+          echo "Actor from info-output: ${{steps.info-output.outputs.actor"
+          echo "Repo url from info-output: ${{steps.info-output.outputs.repo url"
   
