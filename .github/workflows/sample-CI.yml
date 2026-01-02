@@ -37,8 +37,8 @@ jobs:
       - name: printing
         id: info-output
         run: |
-          echo "actor: ${{github.actor}}" >> $GITHUB_OUTPUT
-          echo "repo_url: https://github.com/${{github.url}}" >> $GITHUB_OUTPUT
+          echo "actor=${{github.actor}}" >> $GITHUB_OUTPUT
+          echo "repo_url=https://github.com/${{github.url}}" >> $GITHUB_OUTPUT
 
       - name: printing the stored values
         run: |
