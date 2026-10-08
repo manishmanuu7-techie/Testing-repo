@@ -23,8 +23,18 @@ jobs:
             cd /home/ec2-user/age-calculator
             git fetch origin main
             git reset --hard origin/main
+            
+            # Recreate venv if missing
+            if [ ! -d "venv" ]; then
+              python3 -m venv venv
+            fi
+            
             source venv/bin/activate
             pip install -r Calculate_age/requirements.txt
+            
+            # Stop existing instance safely
             pkill -f "python Calculate_age/app.py" || true
-            nohup python Calculate_age/app.py > app.log 2>&1 &
-            sleep 2
+            
+            # Start process detached from SSH session
+            (nohup python Calculate_age/app.py > app.log 2>&1 &)
+            sleep 3
