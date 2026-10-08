@@ -1,47 +1,70 @@
 name: python-CI
+
 on:
   workflow_dispatch:
     inputs:
-      name:
-        description: "please enter your name"
+      day:
+        description: "Please enter the day you were born (1-31)"
+        required: true
         type: string
-      age:
-        description: "please enter your age"
+
+      month:
+        description: "Please enter the month you were born (1-12)"
+        required: true
         type: string
+
+      year:
+        description: "Please enter the year you were born"
+        required: true
+        type: string
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout code
+      # Checkout the repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: set-up python
+
+      # Set up Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      - name: install dependencies
+
+      # Install dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r Calculate_age/requirements.txt
 
-      - name: run python tests
-        run:
+
+      # Run Python tests
+      - name: Run Python tests
+        run: |
           pytest Calculate_age/ || true
 
+
+      # Run the age calculator
       - name: Run the script
         run: |
-          printf "${{ github.event.inputs.name }}\n${{ github.event.inputs.age }}\n" | python Calculate_age/calculate.py
+          printf "${{ github.event.inputs.day }}\n${{ github.event.inputs.month }}\n${{ github.event.inputs.year }}\n" | python Calculate_age/calculate.py
 
-      - name: printing
+
+      # Store GitHub information
+      - name: Printing
         id: info-output
         run: |
-          echo "actor=${{github.actor}}" >> $GITHUB_OUTPUT
-          echo "repo_url=https://github.com/${{github.url}}" >> $GITHUB_OUTPUT
+          echo "actor=${{ github.actor }}" >> "$GITHUB_OUTPUT"
+          echo "repo_url=https://github.com/${{ github.repository }}" >> "$GITHUB_OUTPUT"
 
-      - name: printing the stored values
+
+      # Print stored values
+      - name: Printing the stored values
         run: |
-          echo "Actor from info-output: ${{steps.info-output.outputs.actor}}"
-          echo "Repo url from info-output: ${{steps.info-output.outputs.repo_url}}"
-  
+          echo "Actor from info-output: ${{ steps.info-output.outputs.actor }}"
+          echo "Repo URL from info-output: ${{ steps.info-output.outputs.repo_url }}"
