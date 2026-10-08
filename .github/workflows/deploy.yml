@@ -25,5 +25,6 @@ jobs:
             git reset --hard origin/main
             source venv/bin/activate
             pip install -r Calculate_age/requirements.txt
-            pkill -f "python app.py" || true
+            pkill -f "python Calculate_age/app.py" || true
             nohup python Calculate_age/app.py > app.log 2>&1 &
+            sleep 2
